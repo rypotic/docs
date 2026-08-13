@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23161826'/%3E%3Cpath d='M16 4L7 8.5V16c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V8.5L16 4z' fill='none' stroke='%239184d9' stroke-width='1.8'/%3E%3Cpath d='M12 16l2.5 2.5L20 13' stroke='%239184d9' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<title>Rypotic Applications</title>
+<style>
+/* ===== Nocturne design-system tokens and component classes ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --color-bg: #161826;
+  --color-surface: #232532;
+  --color-text: #e9e9ed;
+  --color-accent: #9184d9;
+  --color-accent-2: #a7a1db;
+  --color-divider: color-mix(in srgb, #e9e9ed 16%, transparent);
+
+  --color-neutral-100: #f3f5fe;
+  --color-neutral-200: #e4e7f5;
+  --color-neutral-300: #cfd3e5;
+  --color-neutral-400: #b2b6ca;
+  --color-neutral-500: #9397ab;
+  --color-neutral-600: #75798c;
+  --color-neutral-700: #595d6c;
+  --color-neutral-800: #3f424d;
+  --color-neutral-900: #292b31;
+
+  --color-accent-100: #f5f4ff;
+  --color-accent-200: #e7e5fe;
+  --color-accent-300: #d2cefd;
+  --color-accent-400: #b5abfc;
+  --color-accent-500: #968ae0;
+  --color-accent-600: #796cbf;
+  --color-accent-700: #5d5294;
+  --color-accent-800: #423a6a;
+  --color-accent-900: #2b2741;
+
+  --color-accent-2-100: #f5f4ff;
+  --color-accent-2-200: #e7e5fe;
+  --color-accent-2-300: #d2cefd;
+  --color-accent-2-400: #b5afe8;
+  --color-accent-2-500: #9690c9;
+  --color-accent-2-600: #7972a9;
+  --color-accent-2-700: #5c5783;
+  --color-accent-2-800: #423e5d;
+  --color-accent-2-900: #2b293a;
+
+  --color-section: #262a60;
+  --color-section-glow: #353b80;
+  --color-section-ghost: #4c5397;
+
+  --font-heading: "Inter", system-ui, sans-serif;
+  --font-heading-weight: 500;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --space-1: 2.8px;
+  --space-2: 5.6px;
+  --space-3: 8.4px;
+  --space-4: 11.2px;
+  --space-6: 16.8px;
+  --space-8: 22.4px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+
+  --shadow-sm: 0 0 0 1px #3f424d;
+  --shadow-md: 0 0 0 1px #595d6c, 0 6px 18px rgba(0,0,0,0.55);
+  --shadow-lg: 0 0 0 1px #9397ab, 0 16px 40px rgba(0,0,0,0.65);
+}
+
+/* ===== Nocturne base styles ===== */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); font-size: 15px; line-height: 1.55; font-weight: 400; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: var(--font-heading-weight); line-height: 1.12; letter-spacing: -0.015em; margin: 0 0 var(--space-2); }
+h1 { font-size: 42px; }
+h2 { font-size: 32px; }
+h3 { font-size: 25px; }
+h4 { font-size: 20px; }
+h5 { font-size: 16px; }
+h6 { font-size: 13px; }
+h6 { letter-spacing: 0.08em; text-transform: uppercase; }
+p { margin: 0 0 var(--space-3); }
+a { color: var(--color-accent); text-underline-offset: 3px; }
+a:hover { color: var(--color-accent-300); }
+img { display: block; max-width: 100%; }
+figure { margin: 0; }
+figcaption { font-size: 11px; margin-top: var(--space-1); color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+.text-muted { color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
+
+/* — buttons — */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  cursor: pointer; text-decoration: none;
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 14px; line-height: 1.2; color: var(--color-text);
+  background: transparent; border: 1px solid transparent;
+  padding: var(--space-2) calc(var(--space-3) * 1.2);
+  border-radius: var(--radius-md);
+}
+.btn svg { display: block; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-primary { color: var(--color-accent); border-color: var(--color-accent); }
+.btn-primary:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
+.btn-primary:active { background: color-mix(in srgb, var(--color-accent) 22%, transparent); }
+.btn-secondary { border-color: var(--color-divider); }
+.btn-secondary:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.btn-secondary:active { background: color-mix(in srgb, var(--color-text) 14%, transparent); }
+.btn-ghost { color: var(--color-accent); padding-inline: var(--space-1); }
+.btn-ghost:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+.btn-ghost:active { background: color-mix(in srgb, var(--color-accent) 18%, transparent); }
+.btn-icon { width: 36px; height: 36px; padding: 0; }
+.btn-block { width: 100%; margin-top: var(--space-2); }
+
+/* — forms — */
+.field > label {
+  display: block; font-size: 12px; margin-bottom: 5px;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+.input {
+  width: 100%; min-height: 36px; padding: 6px 10px; font: inherit;
+  font-size: 14px; color: var(--color-text); caret-color: var(--color-accent);
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider); border-radius: var(--radius-md);
+}
+.input:hover { border-color: color-mix(in srgb, var(--color-text) 45%, transparent); }
+.input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
+select.input { cursor: pointer; }
+textarea.input { min-height: 90px; resize: vertical; }
+input, select, textarea, button { font-family: inherit; }
+
+/* — cards — */
+.card {
+  display: flex; flex-direction: column; gap: var(--space-2);
+  padding: var(--space-3); border-radius: var(--radius-md); background: var(--color-surface);
+}
+.card-kicker { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); }
+.card-title { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 17px; line-height: 1.2; }
+.card-body { margin: 0; font-size: 13px; opacity: 0.8; flex: 1; }
+.card-meta { display: flex; align-items: center; gap: 6px; font-size: 11px; color: color-mix(in srgb, var(--color-text) 50%, transparent); }
+.elev-sm { box-shadow: var(--shadow-sm); }
+.elev-md { box-shadow: var(--shadow-md); }
+.elev-lg { box-shadow: var(--shadow-lg); }
+
+/* ===== Template-specific styles ===== */
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeSlide { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes cardIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+.anim-fade { animation: fadeSlide 0.35s ease both; }
+.section-card { animation: cardIn 0.4s ease both; }
+.section-card:nth-child(1) { animation-delay: 0.05s; }
+.section-card:nth-child(2) { animation-delay: 0.1s; }
+.section-card:nth-child(3) { animation-delay: 0.15s; }
+.section-card:nth-child(4) { animation-delay: 0.2s; }
+.card { transition: box-shadow 0.2s ease, transform 0.2s ease; }
+.card:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+.radio-card { display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 10px 16px; border-radius: var(--radius-md); border: 1px solid var(--color-neutral-700); font-size: 13px; color: var(--color-neutral-300); transition: border-color 0.15s, background 0.15s, color 0.15s; }
+.radio-card:hover { border-color: var(--color-accent-600); background: color-mix(in oklch, var(--color-accent) 6%, transparent); }
+.radio-card:has(input:checked) { border-color: var(--color-accent); background: color-mix(in oklch, var(--color-accent) 10%, transparent); color: var(--color-accent-300); }
+.radio-card input[type=radio] { accent-color: var(--color-accent); }
+.char-bar-track { height: 2px; background: var(--color-neutral-800); border-radius: 1px; overflow: hidden; margin-top: 6px; }
+.char-bar-fill { height: 100%; background: linear-gradient(90deg, var(--color-accent), var(--color-accent-300)); border-radius: 1px; transition: width 0.2s ease; }
+.community-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 20px; border-radius: var(--radius-md); border: 1px solid var(--color-neutral-700); background: var(--color-neutral-900); color: var(--color-neutral-200); font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color 0.15s, background 0.15s, color 0.15s, transform 0.15s; cursor: pointer; }
+.community-btn:hover { border-color: var(--color-accent-600); background: color-mix(in oklch, var(--color-accent) 8%, transparent); color: var(--color-accent-300); transform: translateY(-1px); }
+.community-btn.discord-btn:hover { border-color: #5865f2; background: color-mix(in oklch, #5865f2 10%, transparent); color: #a0aaff; }
+.community-btn.tiktok-btn:hover { border-color: #fe2c55; background: color-mix(in oklch, #fe2c55 8%, transparent); color: #ff7a93; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-neutral-700); border-radius: 3px; }
+@media (max-width: 520px) { .two-col { grid-template-columns: 1fr !important; } }
+</style>
+</head>
+<body>
+
+<div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 48px 16px 100px; position: relative; overflow-x: hidden;">
+
+  <!-- Ambient glow -->
+  <div aria-hidden="true" style="position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 70% 35% at 50% 0%, color-mix(in oklch, var(--color-accent) 10%, transparent), transparent); z-index: 0;"></div>
+  <div aria-hidden="true" style="position: fixed; bottom: 0; left: 30%; width: 40%; height: 30%; pointer-events: none; background: radial-gradient(ellipse at 50% 100%, color-mix(in oklch, var(--color-accent) 5%, transparent), transparent); z-index: 0;"></div>
+
+  <div style="position: relative; z-index: 1; width: 100%; max-width: 680px;">
+
+    <!-- Header -->
+    <header style="text-align: center; margin-bottom: 40px;">
+      <svg width="260" height="70" viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rypotic Applications" style="display: block; margin: 0 auto 10px;">
+        <defs>
+          <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#9184d9"/>
+            <stop offset="100%" stop-color="#b8aef0"/>
+          </linearGradient>
+        </defs>
+        <!-- Shield icon -->
+        <path d="M18 6L6 12v11c0 7 5.2 13.5 12 15.4C24.8 36.5 30 30 30 23V12L18 6z" fill="none" stroke="url(#accentGrad)" stroke-width="1.8"/>
+        <path d="M13.5 23.5l3 3 6-6" stroke="url(#accentGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <!-- Wordmark -->
+        <text x="38" y="30" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600" letter-spacing="-0.5" fill="url(#accentGrad)">rypotic</text>
+        <text x="39" y="48" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="500" letter-spacing="5" fill="#6b6e9a">APPLICATIONS</text>
+      </svg>
+      <p style="margin: 0; color: var(--color-neutral-400); font-size: 15px; line-height: 1.5;">Think you have what it takes to join the moderation team?</p>
+    </header>
+
+    <!-- Progress (shown when not submitted) -->
+    <div id="progress-section" style="margin-bottom: 28px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-500);">Application progress</span>
+        <span id="progress-text" style="font-size: 12px; font-weight: 600; color: var(--color-accent);">0% complete</span>
+      </div>
+      <div style="height: 3px; background: var(--color-neutral-800); border-radius: 2px; overflow: hidden;">
+        <div id="progress-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--color-accent), var(--color-accent-300)); border-radius: 2px; transition: width 0.5s cubic-bezier(0.25,1,0.5,1);"></div>
+      </div>
+    </div>
+
+    <!-- Success screen (shown when submitted) -->
+    <div id="success-screen" class="card anim-fade" style="display: none; padding: 64px 40px; text-align: center;">
+      <div style="width: 72px; height: 72px; border-radius: 50%; background: color-mix(in oklch, var(--color-accent) 12%, transparent); border: 1px solid color-mix(in oklch, var(--color-accent) 25%, transparent); display: flex; align-items: center; justify-content: center; margin: 0 auto 28px;">
+        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 17l7 7 13-14" stroke="var(--color-accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 style="margin: 0 0 14px; font-size: 26px; font-weight: 600; color: var(--color-text);">Application submitted!</h2>
+      <p style="margin: 0 0 10px; color: var(--color-neutral-300); font-size: 15px; line-height: 1.65; max-width: 380px; margin-left: auto; margin-right: auto;">Thank you for applying to the Rypotic moderation team. We've received your application and will review it carefully.</p>
+      <p style="margin: 0 0 28px; color: var(--color-neutral-600); font-size: 13px;">You'll be contacted via Discord if selected for the next stage.</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 380px; margin: 0 auto;">
+        <a href="https://discord.gg/dQkJrg4nw4" target="_blank" rel="noopener" class="community-btn discord-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026c.462-.62.874-1.275 1.226-1.963.021-.04.001-.088-.041-.104a13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028z"/></svg>
+          Join Server
+        </a>
+        <a href="https://www.tiktok.com/@kroxy07" target="_blank" rel="noopener" class="community-btn tiktok-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+          Follow
+        </a>
+      </div>
+    </div>
+
+    <!-- Form (shown when not submitted) -->
+    <div id="form-section">
+
+      <!-- Error banner -->
+      <div id="error-banner" class="anim-fade" style="display: none; background: color-mix(in oklch, #e05555 10%, transparent); border: 1px solid color-mix(in oklch, #e05555 35%, transparent); border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 20px; color: #f0a0a0; font-size: 14px; display: flex; align-items: center; gap: 10px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" flex-shrink="0" style="flex-shrink:0;"><circle cx="9" cy="9" r="8" stroke="#e05555" stroke-width="1.5"/><path d="M9 5.5v4" stroke="#e05555" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="12.5" r="0.75" fill="#e05555"/></svg>
+        <span id="error-message"></span>
+      </div>
+
+      <form id="rypotic-mod-form" novalidate>
+
+        <!-- ── 01 Your Identity ── -->
+        <div class="card section-card" style="margin-bottom: 12px; padding: 26px 28px;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--color-neutral-800);">
+            <div style="width: 3px; height: 22px; background: var(--color-accent); border-radius: 2px; flex-shrink: 0;"></div>
+            <div>
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent);">01 — Your Identity</div>
+              <div style="font-size: 12px; color: var(--color-neutral-500); margin-top: 2px;">How staff will identify you on Discord</div>
+            </div>
+          </div>
+          <div style="display: grid; gap: 16px;">
+            <div class="field">
+              <label for="f-username">Discord @username <span style="color: #e07070;">*</span></label>
+              <input id="f-username" name="username" class="input" type="text" placeholder="e.g. @coolmod#1234" required style="width: 100%; box-sizing: border-box;">
+            </div>
+            <div class="field">
+              <label for="f-displayname">Display name <span style="color: #e07070;">*</span></label>
+              <input id="f-displayname" name="displayName" class="input" type="text" placeholder="Your nickname in the server" required style="width: 100%; box-sizing: border-box;">
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 02 About You ── -->
+        <div class="card section-card" style="margin-bottom: 12px; padding: 26px 28px;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--color-neutral-800);">
+            <div style="width: 3px; height: 22px; background: var(--color-accent); border-radius: 2px; flex-shrink: 0;"></div>
+            <div>
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent);">02 — About You</div>
+              <div style="font-size: 12px; color: var(--color-neutral-500); margin-top: 2px;">Help us understand who you are</div>
+            </div>
+          </div>
+          <div style="display: grid; gap: 16px;">
+            <div class="two-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div class="field">
+                <label for="f-age">Age range <span style="color: #e07070;">*</span></label>
+                <select id="f-age" name="ageRange" class="input" required style="width: 100%; box-sizing: border-box;">
+                  <option value="">Select…</option>
+                  <option value="13–15">13–15</option>
+                  <option value="16–17">16–17</option>
+                  <option value="18+">18+</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-tz">Time zone <span style="color: #e07070;">*</span></label>
+                <select id="f-tz" name="timezone" class="input" required style="width: 100%; box-sizing: border-box;">
+                  <option value="">Select…</option>
+                  <option>UTC−12 to UTC−10</option>
+                  <option>UTC−9 to UTC−7 (PST / MST)</option>
+                  <option>UTC−6 to UTC−4 (CST / EST)</option>
+                  <option>UTC−3 to UTC−1</option>
+                  <option>UTC±0 (GMT / WET)</option>
+                  <option>UTC+1 to UTC+3 (CET / EET)</option>
+                  <option>UTC+4 to UTC+6</option>
+                  <option>UTC+7 to UTC+9 (JST / CST)</option>
+                  <option>UTC+10 to UTC+12 (AEST)</option>
+                  <option>UTC+13 to UTC+14</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-activity">How active are you? <span style="color: #e07070;">*</span></label>
+              <select id="f-activity" name="activityLevel" class="input" required style="width: 100%; box-sizing: border-box;">
+                <option value="">Select…</option>
+                <option>Very active — online most days, multiple hours</option>
+                <option>Active — online most days, around 1–2 hours</option>
+                <option>Moderately active — a few times a week</option>
+                <option>Occasionally — once a week or less</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-tenure">How long have you been in the community? <span style="color: #e07070;">*</span></label>
+              <select id="f-tenure" name="communityTenure" class="input" required style="width: 100%; box-sizing: border-box;">
+                <option value="">Select…</option>
+                <option>Less than 1 month</option>
+                <option>1–3 months</option>
+                <option>3–6 months</option>
+                <option>6–12 months</option>
+                <option>Over a year</option>
+                <option>Over 2 years</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 03 Experience ── -->
+        <div class="card section-card" style="margin-bottom: 12px; padding: 26px 28px;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--color-neutral-800);">
+            <div style="width: 3px; height: 22px; background: var(--color-accent); border-radius: 2px; flex-shrink: 0;"></div>
+            <div>
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent);">03 — Experience</div>
+              <div style="font-size: 12px; color: var(--color-neutral-500); margin-top: 2px;">Tell us about any relevant background</div>
+            </div>
+          </div>
+          <div style="display: grid; gap: 18px;">
+            <div class="field">
+              <label>Previous moderation experience? <span style="color: #e07070;">*</span></label>
+              <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+                <label class="radio-card">
+                  <input type="radio" name="prevExperience" value="yes" required>
+                  <span>Yes</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="prevExperience" value="no" required>
+                  <span>No</span>
+                </label>
+              </div>
+            </div>
+            <div id="exp-details-container" style="display: none;">
+              <div class="field anim-fade">
+                <label for="f-expdetails">Describe your experience <span style="color: #e07070;">*</span></label>
+                <textarea id="f-expdetails" name="expDetails" class="input" rows="4" maxlength="800" placeholder="Which servers? What were your responsibilities? How long?" required style="width: 100%; box-sizing: border-box;"></textarea>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+                  <div class="char-bar-track" style="flex: 1; margin-right: 10px;"><div id="char-exp-bar" class="char-bar-fill" style="width: 0%;"></div></div>
+                  <span id="char-exp" style="font-size: 11px; color: var(--color-neutral-600);">0 / 800</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 04 Why You? ── -->
+        <div class="card section-card" style="margin-bottom: 12px; padding: 26px 28px;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--color-neutral-800);">
+            <div style="width: 3px; height: 22px; background: var(--color-accent); border-radius: 2px; flex-shrink: 0;"></div>
+            <div>
+              <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent);">04 — Why You?</div>
+              <div style="font-size: 12px; color: var(--color-neutral-500); margin-top: 2px;">Make your case — be genuine</div>
+            </div>
+          </div>
+          <div style="display: grid; gap: 20px;">
+            <div class="field">
+              <label for="f-why">Why do you want to become a moderator? <span style="color: #e07070;">*</span></label>
+              <textarea id="f-why" name="whyMod" class="input" rows="5" maxlength="1000" placeholder="What motivates you? What do you hope to contribute to the community?" required style="width: 100%; box-sizing: border-box;"></textarea>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+                <div class="char-bar-track" style="flex: 1; margin-right: 10px;"><div id="char-why-bar" class="char-bar-fill" style="width: 0%;"></div></div>
+                <span id="char-why" style="font-size: 11px; color: var(--color-neutral-600);">0 / 1000</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-good">What makes you a good moderator? <span style="color: #e07070;">*</span></label>
+              <textarea id="f-good" name="whatGood" class="input" rows="5" maxlength="1000" placeholder="Your strengths, qualities, and approach to moderation…" required style="width: 100%; box-sizing: border-box;"></textarea>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+                <div class="char-bar-track" style="flex: 1; margin-right: 10px;"><div id="char-good-bar" class="char-bar-fill" style="width: 0%;"></div></div>
+                <span id="char-good" style="font-size: 11px; color: var(--color-neutral-600);">0 / 1000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Truthful checkbox -->
+        <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; padding: 16px 20px; background: var(--color-neutral-900); border-radius: var(--radius-md); border: 1px solid var(--color-neutral-800); margin-bottom: 16px; transition: border-color 0.15s;">
+          <input type="checkbox" name="truthful" required style="margin-top: 2px; accent-color: var(--color-accent); width: 16px; height: 16px; flex-shrink: 0; cursor: pointer;">
+          <span style="font-size: 14px; color: var(--color-neutral-300); line-height: 1.55;">I confirm that all information I have provided is truthful and accurate. I understand that dishonest applications will be disqualified. <span style="color: #e07070;">*</span></span>
+        </label>
+
+        <!-- Submit -->
+        <button type="submit" id="submit-btn" class="btn btn-primary btn-block" disabled style="height: 52px; font-size: 15px; font-weight: 600; border-radius: var(--radius-md); position: relative; overflow: hidden; letter-spacing: 0.02em;">
+          <span id="submit-loading" style="display: none; align-items: center; justify-content: center; gap: 10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" style="animation: spin 0.75s linear infinite; flex-shrink: 0;">
+              <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="2" fill="none" opacity="0.25"/>
+              <path d="M9 2a7 7 0 0 1 7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            Submitting…
+          </span>
+          <span id="submit-text">Submit Application</span>
+        </button>
+        <p style="text-align: center; margin: 14px 0 0; font-size: 12px; color: var(--color-neutral-600);">Fields marked <span style="color: #e07070;">*</span> are required.</p>
+
+      </form>
+    </div>
+
+    <!-- Community links — always visible -->
+    <div style="margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--color-neutral-800);">
+      <p style="text-align: center; margin: 0 0 16px; font-size: 13px; color: var(--color-neutral-500);">Connect with the community</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <a href="https://discord.gg/dQkJrg4nw4" target="_blank" rel="noopener" class="community-btn discord-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026c.462-.62.874-1.275 1.226-1.963.021-.04.001-.088-.041-.104a13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028z"/></svg>
+          Join the Server
+        </a>
+        <a href="https://www.tiktok.com/@kroxy07" target="_blank" rel="noopener" class="community-btn tiktok-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+          Follow on TikTok
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  "use strict";
+
+  // ⚠️ SECURITY NOTE: Embedding a Discord webhook URL in client-side JavaScript is NOT secure.
+  // Anyone can inspect this page's source, extract the URL, and use it to spam or abuse your
+  // Discord server without restriction. For a production website, proxy all webhook calls through
+  // a backend or serverless function (e.g. Cloudflare Workers, Vercel Edge Functions) that
+  // validates, rate-limits, and authenticates requests before forwarding to Discord.
+  // This implementation is a prototype only — do not deploy it publicly with a real webhook URL
+  // without adding server-side protection first.
+  var WEBHOOK_URL = 'YOUR_WEBHOOK_URL_HERE';
+
+  // State
+  var state = {
+    submitting: false,
+    submitted: false,
+    prevExp: '',
+    charExp: 0, charWhy: 0, charGood: 0,
+    progress: 0,
+    hasErrors: false,
+    errorMessage: ''
+  };
+
+  // DOM references
+  var form = document.getElementById('rypotic-mod-form');
+  var progressSection = document.getElementById('progress-section');
+  var successScreen = document.getElementById('success-screen');
+  var formSection = document.getElementById('form-section');
+  var errorBanner = document.getElementById('error-banner');
+  var progressText = document.getElementById('progress-text');
+  var progressFill = document.getElementById('progress-fill');
+  var errorMessageEl = document.getElementById('error-message');
+  var submitBtn = document.getElementById('submit-btn');
+  var submitLoading = document.getElementById('submit-loading');
+  var submitText = document.getElementById('submit-text');
+  var expDetailsContainer = document.getElementById('exp-details-container');
+  var expDetailsTextarea = document.getElementById('f-expdetails');
+  var charExpEl = document.getElementById('char-exp');
+  var charExpBar = document.getElementById('char-exp-bar');
+  var charWhyEl = document.getElementById('char-why');
+  var charWhyBar = document.getElementById('char-why-bar');
+  var charGoodEl = document.getElementById('char-good');
+  var charGoodBar = document.getElementById('char-good-bar');
+
+  // Update DOM based on state (mirrors the original renderVals + React re-render)
+  function updateDOM() {
+    var notSubmitted = !state.submitted;
+    var notSubmitting = !state.submitting;
+    var prevExpanded = state.prevExp === 'yes';
+    var submitDisabled = state.submitting || state.submitted;
+
+    // Toggle sections
+    progressSection.style.display = notSubmitted ? 'block' : 'none';
+    successScreen.style.display = state.submitted ? 'block' : 'none';
+    formSection.style.display = notSubmitted ? 'block' : 'none';
+    errorBanner.style.display = state.hasErrors ? 'flex' : 'none';
+
+    // Progress
+    progressText.textContent = state.progress + '% complete';
+    progressFill.style.width = state.progress + '%';
+
+    // Error message
+    errorMessageEl.textContent = state.errorMessage;
+
+    // Submit button
+    submitBtn.disabled = submitDisabled;
+    submitLoading.style.display = state.submitting ? 'flex' : 'none';
+    submitText.style.display = notSubmitting ? 'inline' : 'none';
+
+    // Experience details: show/hide + toggle required
+    if (prevExpanded) {
+      expDetailsContainer.style.display = 'block';
+      if (expDetailsTextarea) expDetailsTextarea.setAttribute('required', '');
+    } else {
+      expDetailsContainer.style.display = 'none';
+      if (expDetailsTextarea) expDetailsTextarea.removeAttribute('required');
+    }
+
+    // Char counters
+    charExpEl.textContent = state.charExp + ' / 800';
+    charExpBar.style.width = Math.round(state.charExp / 800 * 100) + '%';
+    charWhyEl.textContent = state.charWhy + ' / 1000';
+    charWhyBar.style.width = Math.round(state.charWhy / 1000 * 100) + '%';
+    charGoodEl.textContent = state.charGood + ' / 1000';
+    charGoodBar.style.width = Math.round(state.charGood / 1000 * 100) + '%';
+  }
+
+  // Set state and re-render
+  function setState(update) {
+    Object.assign(state, update);
+    updateDOM();
+  }
+
+  // Progress tracking — counts filled required fields
+  function updateProgress() {
+    if (!form) return;
+    var allReq = Array.from(form.querySelectorAll('[required]'));
+    var radioNames = new Set(allReq.filter(function(e) { return e.type === 'radio'; }).map(function(e) { return e.name; }));
+    var nonRadio = allReq.filter(function(e) { return e.type !== 'radio'; });
+    var total = nonRadio.length + radioNames.size;
+    var filled = 0;
+    nonRadio.forEach(function(el) {
+      if (el.type === 'checkbox') { if (el.checked) filled++; }
+      else if (el.value && el.value.trim()) filled++;
+    });
+    radioNames.forEach(function(name) {
+      if (form.querySelector('[name="' + name + '"]:checked')) filled++;
+    });
+    state.progress = total > 0 ? Math.round((filled / total) * 100) : 0;
+    updateDOM();
+  }
+
+  // Validation — returns array of missing required elements
+  function validate() {
+    if (!form) return [];
+    var allReq = Array.from(form.querySelectorAll('[required]'));
+    var radioNames = new Set(allReq.filter(function(e) { return e.type === 'radio'; }).map(function(e) { return e.name; }));
+    var missing = [];
+    allReq.filter(function(e) { return e.type !== 'radio'; }).forEach(function(el) {
+      if (el.type === 'checkbox' && !el.checked) missing.push(el);
+      else if (el.type !== 'checkbox' && (!el.value || !el.value.trim())) missing.push(el);
+    });
+    radioNames.forEach(function(name) {
+      if (!form.querySelector('[name="' + name + '"]:checked')) {
+        var any = form.querySelector('[name="' + name + '"]');
+        if (any) missing.push(any);
+      }
+    });
+    return missing;
+  }
+
+  // Form submit handler
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (!form || state.submitting || state.submitted) return;
+
+    // Reset errors
+    state.hasErrors = false;
+    state.errorMessage = '';
+
+    var missing = validate();
+    if (missing.length > 0) {
+      state.hasErrors = true;
+      state.errorMessage = 'Please complete all required fields — ' + missing.length + ' ' + (missing.length === 1 ? 'field' : 'fields') + ' still need' + (missing.length === 1 ? 's' : '') + ' an answer.';
+      updateDOM();
+      var el = missing[0];
+      el.focus();
+      var rect = el.getBoundingClientRect();
+      window.scrollTo({ top: window.scrollY + rect.top - 120, behavior: 'smooth' });
+      return;
+    }
+
+    state.submitting = true;
+    updateDOM();
+
+    var fd = new FormData(form);
+    var vals = Object.fromEntries(fd.entries());
+    var prevExp = form.querySelector('[name="prevExperience"]:checked') ? form.querySelector('[name="prevExperience"]:checked').value : 'no';
+
+    var fields = [
+      { name: '👤 Discord @username', value: vals.username || '—', inline: true },
+      { name: '🏷️ Display Name', value: vals.displayName || '—', inline: true },
+      { name: '🎂 Age Range', value: vals.ageRange || '—', inline: true },
+      { name: '🌍 Time Zone', value: vals.timezone || '—', inline: true },
+      { name: '⚡ Activity Level', value: vals.activityLevel || '—', inline: false },
+      { name: '📅 Community Tenure', value: vals.communityTenure || '—', inline: true },
+      { name: '🛡️ Previous Mod Experience', value: prevExp === 'yes' ? 'Yes' : 'No', inline: true },
+    ];
+
+    if (prevExp === 'yes' && vals.expDetails && vals.expDetails.trim()) {
+      fields.push({ name: '📋 Experience Details', value: vals.expDetails.slice(0, 1024), inline: false });
+    }
+
+    fields.push(
+      { name: '❓ Why Moderator?', value: (vals.whyMod || '—').slice(0, 1024), inline: false },
+      { name: '⭐ What Makes You a Good Mod?', value: (vals.whatGood || '—').slice(0, 1024), inline: false }
+    );
+
+    var payload = {
+      embeds: [{
+        title: '📋 New Moderator Application',
+        description: 'A new application has been submitted and is awaiting staff review.',
+        color: 0x9184d9,
+        fields: fields,
+        footer: { text: 'Rypotic Applications' },
+        timestamp: new Date().toISOString()
+      }]
+    };
+
+    try {
+      var res = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok || res.status === 204) {
+        state.submitting = false;
+        state.submitted = true;
+        state.progress = 100;
+        updateDOM();
+      } else {
+        throw new Error('Server returned ' + res.status);
+      }
+    } catch (err) {
+      state.submitting = false;
+      state.hasErrors = true;
+      state.errorMessage = 'Submission failed — please try again or contact a staff member directly. (' + err.message + ')';
+      updateDOM();
+    }
+  }
+
+  // Event listeners
+  if (form) {
+    // Progress tracking on input and change
+    form.addEventListener('input', function(e) {
+      if (e.target.name === 'expDetails') {
+        state.charExp = e.target.value.length;
+      } else if (e.target.name === 'whyMod') {
+        state.charWhy = e.target.value.length;
+      } else if (e.target.name === 'whatGood') {
+        state.charGood = e.target.value.length;
+      }
+      updateProgress();
+    });
+
+    form.addEventListener('change', function(e) {
+      if (e.target.name === 'prevExperience') {
+        state.prevExp = e.target.value;
+      }
+      updateProgress();
+    });
+
+    // Form submission
+    form.addEventListener('submit', handleSubmit);
+  }
+
+  // Initialize
+  updateDOM();
+})();
+</script>
+</body>
+</html>
